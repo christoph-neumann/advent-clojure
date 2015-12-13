@@ -7,13 +7,11 @@
 
 (defn floorinc [floor c] (if (= c \() (inc floor) (dec floor)))
 
-(defn day01
-  "Day 01"
+(defn day01a
   [input]
   (str "floor " (reduce floorinc 0 input)))
 
 (defn day01b
-  "Day 01, Second Puzzle"
   [input]
   (->> input
     (reductions floorinc 0)
@@ -22,31 +20,46 @@
     (first)
     (first)))
 
-#_((day01 (slurp "resources/input/day_01.txt"))
+#_((day01a (slurp "resources/input/day_01.txt"))
    (day01b (slurp "resources/input/day_01.txt")))
 
 
 ; Day 02
 
-(defn surface
-  "Day 02"
-  [sides]
-  (let [[l w h] (sort sides)]
-   (+ (* 3 l w) (* 2 w h) (* 2 h l))))
+(defn parse-row
+  [row]
+  (sort (map #(Integer/parseInt %) (s/split row #"x"))))
 
-(defn str-to-surface
+(defn parse
   [input]
-  (->> (s/split input #"x")
-    (map #(Integer/parseInt %))
-    (surface)))
+  (map parse-row (s/split input #"\n")))
 
-(defn day02
+;; Determines the amount of wrapping paper the elves need. Assumes the sizes
+;; have been pre-sorted by size.
+(defn wrapping
+  [[l w h]]
+  (+ (* 3 l w) (* 2 w h) (* 2 h l)))
+
+;; Determines the amount of ribbon the elves need. Assumes the sizes have been
+;; pre-sorted by size.
+(defn ribbon
+  [[l w h]]
+  (+ l l w w (* l w h)))
+
+(defn day02a
   [input]
-  (->> (s/split input #"\n")
-    (map str-to-surface)
+  (->> (parse input)
+    (map wrapping)
     (reduce +)))
 
-#_((day02 (slurp "resources/input/day_02.txt")))
+(defn day02b
+  [input]
+  (->> (parse input)
+    (map ribbon)
+    (reduce +)))
+
+#_((day02a (slurp "resources/input/day_02.txt"))
+   (day02b (slurp "resources/input/day_02.txt")))
 
 
 (defn -main
