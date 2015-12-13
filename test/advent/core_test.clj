@@ -20,3 +20,12 @@
     (is (= 1 (day01b "))(")))
     (is (= 1 (day01b ")))")))
     (is (= 5 (day01b "(()))")))))
+
+
+(deftest day02-test
+  (testing "Day 02"
+    (is (= 58 (surface [2 3 4])))
+    (is (= 58 (surface [4 2 3])))
+    (is (= 43 (str-to-surface "1x1x10")))
+    (is (= 43 (str-to-surface "10x1x1")))
+    (is (= (+ 58 43) (day02 "2x3x4\n10x1x1")))))
