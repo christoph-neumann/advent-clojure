@@ -46,17 +46,14 @@
   [[l w h]]
   (+ l l w w (* l w h)))
 
-(defn day02a
-  [input]
+(defn day02-solve
+  [input op]
   (->> (parse input)
-    (map wrapping)
+    (map op)
     (reduce +)))
 
-(defn day02b
-  [input]
-  (->> (parse input)
-    (map ribbon)
-    (reduce +)))
+(defn day02a [input] (day02-solve input wrapping))
+(defn day02b [input] (day02-solve input ribbon))
 
 #_((day02a (slurp "resources/input/day_02.txt"))
    (day02b (slurp "resources/input/day_02.txt")))
