@@ -51,3 +51,10 @@
     (is (= 1 (day03a "")))
     (is (= 2 (day03a "^")))
     (is (= 4 (day03a "^>v<")))))
+
+(deftest day03a-test
+  (testing "Day 03"
+    (is (= 1 (day03b "")))
+    (is (= 2 (day03b "^")))
+    (is (= 3 (day03b "^v")))
+    (is (= 3 (day03b "^>v<")))))

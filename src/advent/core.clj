@@ -87,7 +87,14 @@
   [input]
   (count (distinct (coords input))))
 
-#_((day03a (slurp "resources/input/day_03.txt")))
+(defn day03b
+  [input]
+  (-> (concat (coords (take-nth 2 input)) (coords (take-nth 2 (drop 1 input))))
+    (distinct)
+    (count)))
+
+#_((day03a (slurp "resources/input/day_03.txt"))
+   (day03b (slurp "resources/input/day_03.txt")))
 
 
 (defn -main
