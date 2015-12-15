@@ -59,6 +59,37 @@
    (day02b (slurp "resources/input/day_02.txt")))
 
 
+; Day 03
+
+(defn next-pos
+  "Returns Santa's next (x,y) position given the current postion and movement
+  direction."
+  [x y dir]
+  (case dir
+    \^ [x (+ y 1)]
+    \v [x (+ y -1)]
+    \> [(+ x 1) y]
+    \< [(+ x -1) y]))
+
+(defn move
+  "Applies the next move to the current (x,y) and returns an updated (x,y) and
+  position history"
+  [[at_x at_y history] next_move]
+  (let [[x y :as pos] (next-pos at_x at_y next_move)]
+    [x y (conj history pos)]))
+
+(defn coords
+  "Produces a stream of coordinates from the directional input."
+  [input]
+  (nth (reduce move [0 0 [[0 0]]] input) 2))
+
+(defn day03a
+  [input]
+  (count (distinct (coords input))))
+
+#_((day03a (slurp "resources/input/day_03.txt")))
+
+
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]

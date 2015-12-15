@@ -37,3 +37,17 @@
     (is (= 34 (day02b "2x3x4")))
     (is (= 14 (day02b "1x1x10")))
     (is (= (+ 34 14) (day02b "1x1x10\n2x3x4")))))
+
+
+(deftest day03a-test
+  (testing "Day 03"
+    (is (= [0 1] (next-pos 0 0 \^)))
+    (is (= [0 -1] (next-pos 0 0 \v)))
+    (is (= [1 0] (next-pos 0 0 \>)))
+    (is (= [-1 0] (next-pos 0 0 \<)))
+    (is (= [[0 0]] (coords "")))
+    (is (= [[0 0] [0 1]] (coords "^")))
+    (is (= [[0 0] [0 1] [1 1] [1 0] [0 0]] (coords "^>v<")))
+    (is (= 1 (day03a "")))
+    (is (= 2 (day03a "^")))
+    (is (= 4 (day03a "^>v<")))))
