@@ -1,5 +1,6 @@
 (ns advent.core
-  (:require [clojure.string :as s])
+  (:require [clojure.string :as s]
+            [digest])
   (:gen-class))
 
 
@@ -95,6 +96,29 @@
 
 #_((day03a (slurp "resources/input/day_03.txt"))
    (day03b (slurp "resources/input/day_03.txt")))
+
+
+; Day 04
+
+(defn is-secret-num
+  [leading prefix n]
+  (as-> n $
+    (str prefix $)
+    (digest/md5 $)
+    (.startsWith $ leading)))
+
+(defn day04
+  [n input]
+  (let [leading (apply str (repeat n "0"))]
+     (->> (iterate inc 1)
+       (filter #(is-secret-num leading input %))
+       (first))))
+
+(defn day04a [input] (day04 5 input))
+(defn day04b [input] (day04 6 input))
+
+#_((day04a (s/trim (slurp "resources/input/day_04.txt")))
+   (day04b (s/trim (slurp "resources/input/day_04.txt"))))
 
 
 (defn -main

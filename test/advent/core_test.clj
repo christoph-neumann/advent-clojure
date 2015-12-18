@@ -58,3 +58,10 @@
     (is (= 2 (day03b "^")))
     (is (= 3 (day03b "^v")))
     (is (= 3 (day03b "^>v<")))))
+
+
+(deftest day04-test
+  (testing "Day 04"
+    (is (= false (is-secret-num "00000" "abcdef" 1)))
+    (is (= true (is-secret-num "00000" "abcdef" 609043)))
+    (is (= true (is-secret-num "00000" "pqrstuv" 1048970)))))
